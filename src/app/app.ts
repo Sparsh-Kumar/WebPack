@@ -1,7 +1,18 @@
 import inputsAreValid from './utils/input-are-valid';
 import parseInputs from './utils/parse-inputs';
 
-export const run = (alertService, componentService) => {
+interface AlertService {
+  hideErrors(): void;
+  handleAdditionError(inputs: string[], numbers: number[]): void;
+}
+
+interface ComponentService {
+  onClick(callback: () => void): void;
+  getInputs(): string[];
+  setResult(result: number | string): void;
+}
+
+export const run = (alertService: AlertService, componentService: ComponentService): void => {
   alertService.hideErrors();
   componentService.onClick(() => {
     alertService.hideErrors();
@@ -15,6 +26,8 @@ export const run = (alertService, componentService) => {
       alertService.handleAdditionError(inputs, parsedInputs);
     }
   });
-}
+};
 
 export default run;
+
+
